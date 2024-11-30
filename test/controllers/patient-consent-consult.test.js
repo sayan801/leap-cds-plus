@@ -6,7 +6,6 @@ const Ajv = require("ajv");
 const request = require("supertest");
 const { app } = require("../../app");
 const {
-  setupMockPatient,
   setupMockConsent,
   setupMockOrganization,
   setupMockAuditEndpoint
@@ -121,19 +120,13 @@ it("should return 400 on bad content", async () => {
 
 const REQUEST = require("../fixtures/request-samples/patient-consent-consult-hook-request.json");
 
-const MOCK_PATIENT_ID = {
-  system: "http://hl7.org/fhir/sid/us-medicare",
-  value: "0000-000-0000"
-};
-
 const ORGANIZATION = require("../fixtures/organizations/org-good-health.json");
 
 it("should return 200 and an array including a consent permit card with an OPTIN consent", async () => {
   expect.assertions(2);
 
   setupMockAuditEndpoint();
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent("patient-privacy", CONSENT_OPTIN);
+  setupMockConsent(CONSENT_OPTIN);
   setupMockOrganization(
     `/${_.get(
       CONSENT_OPTIN,
@@ -165,8 +158,7 @@ it("should return 200 and an array including a consent deny card with an OPTIN c
   expect.assertions(2);
 
   setupMockAuditEndpoint();
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent("patient-privacy", CONSENT_OPTIN);
+  setupMockConsent(CONSENT_OPTIN);
   setupMockOrganization(
     `/${_.get(
       CONSENT_OPTIN,
@@ -204,8 +196,7 @@ it("should return 200 and an array including a consent deny card with an OPTOUT 
   expect.assertions(2);
 
   setupMockAuditEndpoint();
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent("patient-privacy", CONSENT_OPTOUT);
+  setupMockConsent(CONSENT_OPTOUT);
   setupMockOrganization(
     `/${_.get(
       CONSENT_OPTOUT,
@@ -240,11 +231,7 @@ it("should return 200 and an array including a consent permit card with obligati
 
   const ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION = require("../fixtures/consents/r4/consent-boris-deny-restricted-label.json");
 
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent(
-    "patient-privacy",
-    ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION
-  );
+  setupMockConsent(ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION);
   setupMockOrganization(
     `/${_.get(
       ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION,
@@ -315,8 +302,7 @@ it("should return 200 and an array including a consent permit card with obligati
 it("should return 200 and an array including a NO_CONSENT card when no consent exists", async () => {
   expect.assertions(2);
 
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent("patient-privacy", null);
+  setupMockConsent(null);
 
   const res = await request(app)
     .post(HOOK_ENDPOINT)
