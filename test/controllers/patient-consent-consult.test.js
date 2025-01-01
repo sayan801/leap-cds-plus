@@ -7,7 +7,6 @@ const request = require("supertest");
 const { app } = require("../../app");
 const {
   setupMockConsent,
-  setupMockOrganization,
   setupMockAuditEndpoint
 } = require("../common/setup-mock-consent-servers");
 
@@ -127,13 +126,6 @@ it("should return 200 and an array including a consent permit card with an OPTIN
 
   setupMockAuditEndpoint();
   setupMockConsent(CONSENT_OPTIN);
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_OPTIN,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const res = await request(app)
     .post(HOOK_ENDPOINT)
@@ -147,7 +139,7 @@ it("should return 200 and an array including a consent permit card with an OPTIN
         extension: {
           decision: "CONSENT_PERMIT",
           obligations: [],
-          basedOn: "https://fhir-cdms1/base/Consent/1"
+          basedOn: "https://fhir-cdms1/base/Consent/12"
         }
       })
     ])
@@ -159,13 +151,7 @@ it("should return 200 and an array including a consent deny card with an OPTIN c
 
   setupMockAuditEndpoint();
   setupMockConsent(CONSENT_OPTIN);
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_OPTIN,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
+
 
   const REQUEST_WITH_PROHIBITED_ACTOR = _.set(
     _.cloneDeep(REQUEST),
@@ -185,7 +171,7 @@ it("should return 200 and an array including a consent deny card with an OPTIN c
         extension: {
           decision: "CONSENT_DENY",
           obligations: [],
-          basedOn: "https://fhir-cdms1/base/Consent/1"
+          basedOn: "https://fhir-cdms1/base/Consent/12"
         }
       })
     ])
@@ -197,13 +183,7 @@ it("should return 200 and an array including a consent deny card with an OPTOUT 
 
   setupMockAuditEndpoint();
   setupMockConsent(CONSENT_OPTOUT);
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_OPTOUT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
+
 
   const res = await request(app)
     .post(HOOK_ENDPOINT)
@@ -217,7 +197,7 @@ it("should return 200 and an array including a consent deny card with an OPTOUT 
         extension: {
           decision: "CONSENT_DENY",
           obligations: [],
-          basedOn: "https://fhir-cdms1/base/Consent/1"
+          basedOn: "https://fhir-cdms1/base/Consent/12"
         }
       })
     ])
@@ -232,13 +212,6 @@ it("should return 200 and an array including a consent permit card with obligati
   const ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION = require("../fixtures/consents/r4/consent-boris-deny-restricted-label.json");
 
   setupMockConsent(ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION);
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const THE_REQUEST = _.cloneDeep(REQUEST);
   THE_REQUEST.context.actor = [ORGANIZATION.identifier[0]];
@@ -283,7 +256,7 @@ it("should return 200 and an array including a consent permit card with obligati
               }
             }
           ],
-          basedOn: "https://fhir-cdms1/base/Consent/1",
+          basedOn: "https://fhir-cdms1/base/Consent/6",
           content: expect.objectContaining({
             total: 1
           })
