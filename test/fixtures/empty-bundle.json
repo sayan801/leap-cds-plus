@@ -11,5 +11,6 @@
       "relation": "self",
       "url": "http://hapi.fhir.org/baseR4/Consent?patient=Patient%2F380423465456"
     }
-  ]
+  ],
+  "entry": []
 }

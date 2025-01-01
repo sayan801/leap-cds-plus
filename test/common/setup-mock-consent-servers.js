@@ -5,8 +5,8 @@ const CONSENT_FHIR_SERVERS = (process.env.CONSENT_FHIR_SERVERS || "")
   .split(",")
   .map((res) => res.trim());
 
+const BASE_BUNDLE = require("../fixtures/base-bundle.json");
 const EMPTY_BUNDLE = require("../fixtures/empty-bundle.json");
-const PATIENT = require("../fixtures/patients/patient-boris.json");
 
 const MOCK_FHIR_SERVERS = CONSENT_FHIR_SERVERS.map((fhirBase) =>
   nock(fhirBase)
@@ -14,25 +14,9 @@ const MOCK_FHIR_SERVERS = CONSENT_FHIR_SERVERS.map((fhirBase) =>
     .replyContentLength()
 );
 
-function setupMockOrganization(url, organizationResource, howManyRequests) {
-  const numberOfTimes = howManyRequests || 1;
-  MOCK_FHIR_SERVERS[0]
-    .get(url)
-    .times(numberOfTimes)
-    .reply(200, organizationResource);
-}
-
 function setupMockAuditEndpoint(howManyRequests) {
   const numberOfTimes = howManyRequests || 1;
   MOCK_FHIR_SERVERS[0].post("/AuditEvent").times(numberOfTimes).reply(200);
-}
-
-function setupMockPractitioner(url, practitionerResource, howManyRequests) {
-  const numberOfTimes = howManyRequests || 1;
-  MOCK_FHIR_SERVERS[0]
-    .get(url)
-    .times(numberOfTimes)
-    .reply(200, practitionerResource);
 }
 
 function setupMockConsent(consent, index, patientIdentifier) {
@@ -42,38 +26,39 @@ function setupMockConsent(consent, index, patientIdentifier) {
     value: "0000-000-0000"
   };
 
-  const CONSENT_RESULTS_BUNDLE = consent
-    ? _.set(
-        _.set(
-          _.set(
-            _.clone(EMPTY_BUNDLE),
-            "entry[0].resource",
-            _.set(consent, "id", "1")
-          ),
-          "entry[0].fullUrl",
-          `${CONSENT_FHIR_SERVERS[0]}/Consent/1`
-        ),
-        "total",
-        1
-      )
-    : EMPTY_BUNDLE;
+  let CONSENT_RESULTS_BUNDLE = deepClone(BASE_BUNDLE);
+  if (consent) {
+    CONSENT_RESULTS_BUNDLE.entry.push({
+      fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
+      resource: consent
+    });
+    CONSENT_RESULTS_BUNDLE.total = 4;
+  } else {
+    CONSENT_RESULTS_BUNDLE = EMPTY_BUNDLE;
+  }
 
+  const FHIR_QUERY = new URLSearchParams({
+    "subject.identifier": `${system}|${value}`,
+    _include: "*"
+  });
   MOCK_FHIR_SERVERS[fhirServerIndex]
-    .get(`/Consent?patient.identifier=${system}|${value}`)
+    .get(`/Consent`)
+    .query(FHIR_QUERY)    
     .reply(200, CONSENT_RESULTS_BUNDLE);
 
   for (var i = 0; i < MOCK_FHIR_SERVERS.length; i++) {
     if (i == fhirServerIndex) continue;
     MOCK_FHIR_SERVERS[i]
-      .get(`/Consent?patient.identifier=${system}|${value}`)
+      .get("/Consent")
+      .query(FHIR_QUERY)
       .reply(200, EMPTY_BUNDLE);
   }
 }
 
+const deepClone = (obj) => JSON.parse(JSON.stringify(obj));
+
 module.exports = {
   setupMockConsent,
-  setupMockOrganization,
-  setupMockPractitioner,
   setupMockAuditEndpoint,
   MOCK_FHIR_SERVERS,
   CONSENT_FHIR_SERVERS

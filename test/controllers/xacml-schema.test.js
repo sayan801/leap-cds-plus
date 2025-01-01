@@ -5,7 +5,6 @@ const request = require("supertest");
 const { app } = require("../../app");
 const {
   setupMockConsent,
-  setupMockOrganization,
   setupMockAuditEndpoint
 } = require("../common/setup-mock-consent-servers");
 
@@ -243,13 +242,6 @@ it("should return a response compliant with the response schema", async () => {
 
   setupMockAuditEndpoint();
   setupMockConsent(ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION);
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const REQUEST_WITH_PROHIBITED_ACTOR = _.set(
     _.cloneDeep(REQUEST),

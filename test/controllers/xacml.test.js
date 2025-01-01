@@ -5,7 +5,6 @@ const request = require("supertest");
 const { app } = require("../../app");
 const {
   setupMockConsent,
-  setupMockOrganization,
   setupMockAuditEndpoint
 } = require("../common/setup-mock-consent-servers");
 
@@ -27,13 +26,6 @@ it("should return 200 and a permit card with an OPTIN consent", async () => {
 
   setupMockAuditEndpoint();
   setupMockConsent(CONSENT_OPTIN);
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_OPTIN,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const res = await request(app)
     .post(ENDPOINT)
@@ -52,13 +44,6 @@ it("should return 200 and a deny response with an OPTIN consent and provision wi
 
   setupMockAuditEndpoint();
   setupMockConsent(CONSENT_OPTIN);
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_OPTIN,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const REQUEST_WITH_PROHIBITED_ACTOR = _.set(
     _.cloneDeep(REQUEST),
@@ -82,13 +67,6 @@ it("should return 200 and a deny response with an OPTOUT consent", async () => {
   expect.assertions(2);
   setupMockAuditEndpoint();
   setupMockConsent(CONSENT_OPTOUT);
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_OPTOUT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const res = await request(app)
     .post(ENDPOINT)
@@ -109,13 +87,6 @@ it("should return 200 and a consent permit response with obligations when a cons
 
   setupMockAuditEndpoint();
   setupMockConsent(ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION);
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const REQUEST_WITH_PROHIBITED_ACTOR = _.set(
     _.cloneDeep(REQUEST),
