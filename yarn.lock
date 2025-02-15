@@ -3304,9 +3304,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonpath-plus@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "jsonpath-plus@npm:10.2.0"
+"jsonpath-plus@npm:^10.3.0":
+  version: 10.3.0
+  resolution: "jsonpath-plus@npm:10.3.0"
   dependencies:
     "@jsep-plugin/assignment": ^1.3.0
     "@jsep-plugin/regex": ^1.0.4
@@ -3314,7 +3314,7 @@ __metadata:
   bin:
     jsonpath: bin/jsonpath-cli.js
     jsonpath-plus: bin/jsonpath-cli.js
-  checksum: 862a96a0179f342fa6c012065fa78458d4ae4835f18a6ef580d18807101d8c2c3509dc20c9857474503205bff8f06c309e17d7420b68196262d15ad1e4f22146
+  checksum: b0f7e9af4d3c586911690c0afc20cbdc3c8af963a739c7f7a62905ed34a25bf5279f2c254e7222aa65f834d2ae3c8cc217986d528c8206896afa008d6619cde7
   languageName: node
   linkType: hard
 
@@ -3380,14 +3380,14 @@ __metadata:
     express: ^4.21.2
     husky: ^9.1.7
     jest: ^29.7.0
-    jsonpath-plus: ^10.2.0
+    jsonpath-plus: ^10.3.0
     jsonwebtoken: ^9.0.2
     lodash: ^4.17.21
     morgan: ^1.10.0
-    nock: ^14.0.0
+    nock: ^14.0.1
     nodemon: ^3.1.9
     precise-commits: ^1.0.2
-    prettier: ^3.4.2
+    prettier: ^3.5.1
     superagent: ^10.1.1
     supertest: ^7.0.0
     winston: ^3.17.0
@@ -3837,14 +3837,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nock@npm:^14.0.0":
-  version: 14.0.0
-  resolution: "nock@npm:14.0.0"
+"nock@npm:^14.0.1":
+  version: 14.0.1
+  resolution: "nock@npm:14.0.1"
   dependencies:
     "@mswjs/interceptors": ^0.37.3
     json-stringify-safe: ^5.0.1
     propagate: ^2.0.0
-  checksum: 73be448598fc72e935e4a328c6f11ed3da185b4bdf7e3880c4fb0c59197127fea0ea1d893aa042c778f3d71a7a77f9c23c3392ffd2de2ee38c1a49015a3c1059
+  checksum: 7c8fd87b9a098c4d6a5c219e6c81af09e81878d5fd76ed8b42fc8ab0404985caf53f1eb54a175f6cd73c3981af2b6f75d0d708e247585d399f507318d529ddb7
   languageName: node
   linkType: hard
 
@@ -4254,12 +4254,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.4.2":
-  version: 3.4.2
-  resolution: "prettier@npm:3.4.2"
+"prettier@npm:^3.5.1":
+  version: 3.5.1
+  resolution: "prettier@npm:3.5.1"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 061c84513db62d3944c8dc8df36584dad82883ce4e49efcdbedd8703dce5b173c33fd9d2a4e1725d642a3b713c932b55418342eaa347479bc4a9cca114a04cd0
+  checksum: a3fc77235b5a30259641547c688a067bd9db10fbf741be2ba94901480937ae8f5d26c8d7b1b688f93091882ec6afb8e48f90b86ddc3deb85a0eed28164680cb2
   languageName: node
   linkType: hard
 
