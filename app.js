@@ -7,8 +7,6 @@ const { error } = require("./controllers/error");
 const { discovery } = require("./controllers/discovery");
 const ConsentDecisionHook = require("./controllers/patient-consent-consult");
 const Xacml = require("./controllers/xacml");
-const SLS = require("./controllers/sls");
-const SLSHook = require("./controllers/bundle-security-label");
 
 const app = express();
 
@@ -26,8 +24,6 @@ app.get("/cds-services", discovery);
 
 app.post("/cds-services/patient-consent-consult", ConsentDecisionHook.post);
 app.post("/xacml", Xacml.post);
-app.post("/sls", SLS.post);
-app.post("/cds-services/bundle-security-label", SLSHook.post);
 
 app.use(error);
 

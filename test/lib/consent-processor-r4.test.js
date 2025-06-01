@@ -2,7 +2,6 @@ const _ = require("lodash");
 const nock = require("nock");
 
 const {
-  setupMockOrganization,
   setupMockAuditEndpoint,
   CONSENT_FHIR_SERVERS
 } = require("../common/setup-mock-consent-servers");
@@ -12,6 +11,7 @@ const { PURPOSE_OF_USE_SYSTEM } = require("../../lib/consent-valuesets");
 const { processDecision } = require("../../lib/consent-processor");
 
 const ORGANIZATION = require("../fixtures/organizations/org-good-health.json");
+const PRACTITIONER = require("../fixtures/practitioner/practitioner-dr-bob.json");
 
 const BASE_CONSENT = require("../fixtures/consents/r4/consent-boris-optin.json");
 const ACTIVE_PRIVACY_CONSENT = BASE_CONSENT;
@@ -39,6 +39,11 @@ const OLDER_ACTIVE_PRIVACY_OPTOUT_CONSENT = _.set(
   "dateTime",
   "2010-11-01"
 );
+
+const REFERENCED_RESOURCES = {
+  "Organization/54": ORGANIZATION,
+  "Practitioner/001": PRACTITIONER
+};
 
 const QUERY = {
   hook: "patient-consent-consult",
@@ -73,20 +78,13 @@ afterEach(() => {
 it("active optin consent", async () => {
   expect.assertions(1);
   setupMockAuditEndpoint();
-  setupMockOrganization(
-    `/${_.get(
-      BASE_CONSENT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT
+        consents: [ACTIVE_PRIVACY_CONSENT],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     QUERY.context
@@ -100,13 +98,6 @@ it("active optin consent", async () => {
 it("active optin consent with no scope in query", async () => {
   expect.assertions(1);
   setupMockAuditEndpoint();
-  setupMockOrganization(
-    `/${_.get(
-      BASE_CONSENT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const queryContext = _.clone(QUERY.context);
   queryContext.scope = null;
@@ -115,8 +106,8 @@ it("active optin consent with no scope in query", async () => {
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT
+        consents: [ACTIVE_PRIVACY_CONSENT],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     queryContext
@@ -130,20 +121,13 @@ it("active optin consent with no scope in query", async () => {
 it("active optin consent with scope stored in category[0]", async () => {
   expect.assertions(1);
   setupMockAuditEndpoint();
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_SCOPE_IN_CATEGORY,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT
+        consents: [ACTIVE_PRIVACY_CONSENT],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     QUERY.context
@@ -157,20 +141,12 @@ it("active optin consent with scope stored in category[0]", async () => {
 it("active but expired optin consent", async () => {
   expect.assertions(1);
 
-  setupMockOrganization(
-    `/${_.get(
-      BASE_CONSENT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
-
   let decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: EXPIRED_PRIVACY_CONSENT
+        consents: [EXPIRED_PRIVACY_CONSENT],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     QUERY.context
@@ -183,20 +159,12 @@ it("active but expired optin consent", async () => {
 it("active but not yet valid optin consent", async () => {
   expect.assertions(1);
 
-  setupMockOrganization(
-    `/${_.get(
-      BASE_CONSENT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
-
   decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: NOT_YET_VALID_PRIVACY_CONSENT
+        consents: [NOT_YET_VALID_PRIVACY_CONSENT],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     QUERY.context
@@ -211,20 +179,13 @@ it("active optin consent with blacklisted recipient actor", async () => {
   expect.assertions(1);
 
   setupMockAuditEndpoint();
-  setupMockOrganization(
-    `/${_.get(
-      BASE_CONSENT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT
+        consents: [ACTIVE_PRIVACY_CONSENT],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -253,20 +214,13 @@ it("active optin consent with blacklisted recipient actor based on one of the mu
   expect.assertions(1);
 
   setupMockAuditEndpoint();
-  setupMockOrganization(
-    `/${_.get(
-      BASE_CONSENT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT
+        consents: [ACTIVE_PRIVACY_CONSENT],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -297,21 +251,12 @@ it("active optin consent with blacklisted recipient actor of type practitioner",
   expect.assertions(1);
 
   setupMockAuditEndpoint();
-  const PRACTITIONER = require("../fixtures/practitioner/practitioner-dr-bob.json");
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_DENY_PRACTITIONER,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    PRACTITIONER
-  );
-
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: CONSENT_DENY_PRACTITIONER
+        consents: [CONSENT_DENY_PRACTITIONER],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -353,8 +298,8 @@ it("active optin consent with blacklisted purpose of use", async () => {
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: CONSENT_WITH_POU_PROVISION
+        consents: [CONSENT_WITH_POU_PROVISION],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -382,20 +327,13 @@ it("active optin consent with security label provision", async () => {
   expect.assertions(1);
 
   setupMockAuditEndpoint();
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
 
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -445,8 +383,8 @@ it("active optin consent with multiple security label provision", async () => {
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_MULTIPLE_SEC_LABEL_PROVISION
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_MULTIPLE_SEC_LABEL_PROVISION],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -497,21 +435,12 @@ it("active optin consent with array of security label provisions", async () => {
 
   setupMockAuditEndpoint();
 
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_PROVISION_ARRAY,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION,
-    2
-  );
-
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_PROVISION_ARRAY
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_PROVISION_ARRAY],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -562,21 +491,12 @@ it("active optin consent with security label and content class provisions", asyn
 
   setupMockAuditEndpoint();
 
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_CONTENT_CLASS_PROVISION,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION,
-    2
-  );
-
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_CONTENT_CLASS_PROVISION
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_CONTENT_CLASS_PROVISION],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -627,22 +547,14 @@ it("active optin consent with content class provisions and sec label with reques
 
   setupMockAuditEndpoint();
 
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_CONTENT_CLASS_PROVISION_AND_SEC_LABEL,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION,
-    2
-  );
-
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource:
+        consents: [
           ACTIVE_PRIVACY_CONSENT_WITH_CONTENT_CLASS_PROVISION_AND_SEC_LABEL
+        ],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -695,21 +607,12 @@ it("active optin consent with content class provisions with request including a 
 
   setupMockAuditEndpoint();
 
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_CONTENT_CLASS_PROVISION,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION,
-    2
-  );
-
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_CONTENT_CLASS_PROVISION
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_CONTENT_CLASS_PROVISION],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -743,21 +646,13 @@ it("active optin consent with clinical code provisions", async () => {
   const ACTIVE_PRIVACY_CONSENT_WITH_CLINICAL_CODE_PROVISION = require("../fixtures/consents/r4/consent-boris-deny-restricted-clinical-code");
 
   setupMockAuditEndpoint();
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_CLINICAL_CODE_PROVISION,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION,
-    2
-  );
 
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_CLINICAL_CODE_PROVISION
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_CLINICAL_CODE_PROVISION],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -801,21 +696,13 @@ it("active optin consent with array of provisions", async () => {
   expect.assertions(1);
 
   setupMockAuditEndpoint();
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_PROVISION_ARRAY,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION,
-    2
-  );
 
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_PROVISION_ARRAY
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_PROVISION_ARRAY],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -845,8 +732,8 @@ it("active optin consent with purpose in root provision not matching the request
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_POU_IN_ROOT_ROVISION
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_POU_IN_ROOT_ROVISION],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -876,8 +763,8 @@ it("active optin consent with purpose in root provision matching the request pur
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_POU_IN_ROOT_ROVISION
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_POU_IN_ROOT_ROVISION],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -907,8 +794,8 @@ it("active optin consent with array of provisions matching some of the request p
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_PRIVACY_CONSENT_WITH_POU_IN_ROOT_ROVISION
+        consents: [ACTIVE_PRIVACY_CONSENT_WITH_POU_IN_ROOT_ROVISION],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     {
@@ -932,20 +819,12 @@ it("active optin consent with array of provisions matching some of the request p
 it("no active optin consent", async () => {
   expect.assertions(1);
 
-  setupMockOrganization(
-    `/${_.get(
-      BASE_CONSENT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
-
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: INACTIVE_PRIVACY_CONSENT
+        consents: [INACTIVE_PRIVACY_CONSENT],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     QUERY.context
@@ -959,20 +838,12 @@ it("no active optin consent", async () => {
 it("active optin consent with different scope", async () => {
   expect.assertions(1);
 
-  setupMockOrganization(
-    `/${_.get(
-      BASE_CONSENT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
-
   const decision = await processDecision(
     [
       {
         fhirBase: CONSENT_FHIR_SERVERS[0],
-        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-        resource: ACTIVE_RESEARCH_CONSENT
+        consents: [ACTIVE_RESEARCH_CONSENT],
+        referencedResources: REFERENCED_RESOURCES
       }
     ],
     QUERY.context

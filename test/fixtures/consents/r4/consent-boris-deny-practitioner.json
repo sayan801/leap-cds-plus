@@ -1,5 +1,6 @@
 {
   "resourceType": "Consent",
+  "id": "1",
   "status": "active",
   "category": [
     {

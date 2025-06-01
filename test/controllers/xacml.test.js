@@ -4,9 +4,7 @@ const nock = require("nock");
 const request = require("supertest");
 const { app } = require("../../app");
 const {
-  setupMockPatient,
   setupMockConsent,
-  setupMockOrganization,
   setupMockAuditEndpoint
 } = require("../common/setup-mock-consent-servers");
 
@@ -21,26 +19,13 @@ afterEach(() => {
 
 const REQUEST = require("../fixtures/request-samples/xacml-request.json");
 
-const MOCK_PATIENT_ID = {
-  system: "http://hl7.org/fhir/sid/us-medicare",
-  value: "0000-000-0000"
-};
-
 const ORGANIZATION = require("../fixtures/organizations/org-good-health.json");
 
 it("should return 200 and a permit card with an OPTIN consent", async () => {
   expect.assertions(2);
 
   setupMockAuditEndpoint();
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent("patient-privacy", CONSENT_OPTIN);
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_OPTIN,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
+  setupMockConsent(CONSENT_OPTIN);
 
   const res = await request(app)
     .post(ENDPOINT)
@@ -58,15 +43,7 @@ it("should return 200 and a deny response with an OPTIN consent and provision wi
   expect.assertions(2);
 
   setupMockAuditEndpoint();
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent("patient-privacy", CONSENT_OPTIN);
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_OPTIN,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
+  setupMockConsent(CONSENT_OPTIN);
 
   const REQUEST_WITH_PROHIBITED_ACTOR = _.set(
     _.cloneDeep(REQUEST),
@@ -89,15 +66,7 @@ it("should return 200 and a deny response with an OPTIN consent and provision wi
 it("should return 200 and a deny response with an OPTOUT consent", async () => {
   expect.assertions(2);
   setupMockAuditEndpoint();
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent("patient-privacy", CONSENT_OPTOUT);
-  setupMockOrganization(
-    `/${_.get(
-      CONSENT_OPTOUT,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
+  setupMockConsent(CONSENT_OPTOUT);
 
   const res = await request(app)
     .post(ENDPOINT)
@@ -117,18 +86,7 @@ it("should return 200 and a consent permit response with obligations when a cons
   const ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION = require("../fixtures/consents/r4/consent-boris-deny-restricted-label.json");
 
   setupMockAuditEndpoint();
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent(
-    "patient-privacy",
-    ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION
-  );
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
+  setupMockConsent(ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION);
 
   const REQUEST_WITH_PROHIBITED_ACTOR = _.set(
     _.cloneDeep(REQUEST),
@@ -174,8 +132,7 @@ it("should return 200 and a consent permit response with obligations when a cons
 it("should return 200 and an array including a NO_CONSENT card when no consent exists", async () => {
   expect.assertions(2);
 
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent("patient-privacy", null);
+  setupMockConsent(null);
 
   const res = await request(app)
     .post(ENDPOINT)

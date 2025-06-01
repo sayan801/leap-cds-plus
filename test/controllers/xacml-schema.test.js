@@ -4,9 +4,7 @@ const nock = require("nock");
 const request = require("supertest");
 const { app } = require("../../app");
 const {
-  setupMockPatient,
   setupMockConsent,
-  setupMockOrganization,
   setupMockAuditEndpoint
 } = require("../common/setup-mock-consent-servers");
 
@@ -237,28 +235,13 @@ it("should return 400 on missing required attribtues", async () => {
 
 it("should return a response compliant with the response schema", async () => {
   const REQUEST = require("../fixtures/request-samples/xacml-request.json");
-  const MOCK_PATIENT_ID = {
-    system: "http://hl7.org/fhir/sid/us-medicare",
-    value: "0000-000-0000"
-  };
   const ORGANIZATION = require("../fixtures/organizations/org-good-health.json");
   const ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION = require("../fixtures/consents/r4/consent-boris-deny-restricted-label.json");
 
   expect.assertions(1);
 
   setupMockAuditEndpoint();
-  setupMockPatient(MOCK_PATIENT_ID);
-  setupMockConsent(
-    "patient-privacy",
-    ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION
-  );
-  setupMockOrganization(
-    `/${_.get(
-      ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION,
-      "provision.provision[0].actor[0].reference.reference"
-    )}`,
-    ORGANIZATION
-  );
+  setupMockConsent(ACTIVE_PRIVACY_CONSENT_WITH_SEC_LABEL_PROVISION);
 
   const REQUEST_WITH_PROHIBITED_ACTOR = _.set(
     _.cloneDeep(REQUEST),
