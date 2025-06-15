@@ -19,31 +19,39 @@ function setupMockAuditEndpoint(howManyRequests) {
   MOCK_FHIR_SERVERS[0].post("/AuditEvent").times(numberOfTimes).reply(200);
 }
 
-function setupMockConsent(consent, index, patientIdentifier) {
+function makeBundle(consent) {
+  if (consent) {
+    const CONSENT_RESULTS_BUNDLE = deepClone(BASE_BUNDLE);
+    CONSENT_RESULTS_BUNDLE.entry = [
+      ...CONSENT_RESULTS_BUNDLE.entry,
+      {
+        fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
+        resource: consent
+      }
+    ];
+    CONSENT_RESULTS_BUNDLE.total = 4;
+    return CONSENT_RESULTS_BUNDLE;
+  } else {
+    return EMPTY_BUNDLE;
+  }
+}
+
+function setupMockConsent(consent, index) {
   const fhirServerIndex = index || 0;
-  const { system, value } = patientIdentifier || {
+  const { system, value } = {
     system: "http://hl7.org/fhir/sid/us-medicare",
     value: "0000-000-0000"
   };
 
-  let CONSENT_RESULTS_BUNDLE = deepClone(BASE_BUNDLE);
-  if (consent) {
-    CONSENT_RESULTS_BUNDLE.entry.push({
-      fullUrl: `${CONSENT_FHIR_SERVERS[0]}/Consent/1`,
-      resource: consent
-    });
-    CONSENT_RESULTS_BUNDLE.total = 4;
-  } else {
-    CONSENT_RESULTS_BUNDLE = EMPTY_BUNDLE;
-  }
+  const CONSENT_RESULTS_BUNDLE = makeBundle(consent);
+  const FHIR_QUERY = {
+    "patient.identifier": `${system}|${value}`,
+    _include: "Consent:actor"
+  };
 
-  const FHIR_QUERY = new URLSearchParams({
-    "subject.identifier": `${system}|${value}`,
-    _include: "*"
-  });
   MOCK_FHIR_SERVERS[fhirServerIndex]
-    .get(`/Consent`)
-    .query(FHIR_QUERY)    
+    .get("/Consent")
+    .query(FHIR_QUERY)
     .reply(200, CONSENT_RESULTS_BUNDLE);
 
   for (var i = 0; i < MOCK_FHIR_SERVERS.length; i++) {
