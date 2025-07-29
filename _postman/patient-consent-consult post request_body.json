@@ -1,0 +1,33 @@
+{
+  "hook": "patient-consent-consult",
+  "hookInstance": "hook-instance-123",
+  "context": {
+    "patientId": [
+      {
+        "system": "http://hl7.org/fhir/sid/us-ssn",
+        "value": "111111111"
+      }
+    ],
+    "category": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/consentcategorycodes",
+        "code": "NPP"
+      }
+    ],
+    "class": [
+      {
+        "system": "http://hl7.org/fhir/resource-types",
+        "code": "MedicationStatement"
+      }
+    ],
+    "purposeOfUse": [
+      "TREAT"
+    ],
+    "actor": [
+      {
+        "system": "urn:ietf:rfc:3986",
+        "value": "2.16.840.1.113883.20.5"
+      }
+    ]
+  }
+}
