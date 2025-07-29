@@ -1,0 +1,1660 @@
+{
+    "hook": "patient-consent-consult",
+    "hookInstance": "hook-instance-123",
+    "context": {
+        "patientId": [
+            {
+                "system": "http://hl7.org/fhir/sid/us-ssn",
+                "value": "111111111"
+            }
+        ],
+        "category": [
+            {
+                "system": "http://terminology.hl7.org/CodeSystem/consentcategorycodes",
+                "code": "NPP"
+            }
+        ],
+        "actor": [
+            {
+                "system": "urn:ietf:rfc:3986",
+                "value": "2.16.840.1.113883.20.5"
+            }
+        ],
+        "content": {
+            "resourceType": "Bundle",
+            "type": "searchset",
+            "entry": [
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/Condition/0197837a-cb95-732f-914e-5e4d75403aa9",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "Condition",
+                        "id": "0197837a-cb95-732f-914e-5e4d75403aa9",
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "clinicalStatus": {
+                            "coding": [
+                                {
+                                    "code": "active",
+                                    "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+                                }
+                            ]
+                        },
+                        "category": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "problem-list-item",
+                                        "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+                                    }
+                                ]
+                            }
+                        ],
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/condition-identifier",
+                                "value": "HTN-12346"
+                            }
+                        ],
+                        "code": {
+                            "coding": [
+                                {
+                                    "code": "I10",
+                                    "system": "http://hl7.org/fhir/sid/icd-10",
+                                    "display": "Essential (primary) hypertension"
+                                },
+                                {
+                                    "code": "59621000",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Essential hypertension (disorder)"
+                                }
+                            ],
+                            "text": "Essential hypertension"
+                        },
+                        "meta": {
+                            "versionId": "0197837a-cf66-71f8-99f1-d3dbe64be339",
+                            "lastUpdated": "2025-06-18T14:39:13.254Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": []
+                        },
+                        "updated": false
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/Observation/0197837a-cba4-7336-a0d0-ef69145b69fe",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "Observation",
+                        "id": "0197837a-cba4-7336-a0d0-ef69145b69fe",
+                        "meta": {
+                            "profile": [
+                                "http://shift.github.io/demo/StructureDefinition/sensitive-observation-profile"
+                            ],
+                            "versionId": "0197837a-cff5-707b-8463-ecf0dfe7a4f6",
+                            "lastUpdated": "2025-06-18T14:39:13.397Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": [
+                                {
+                                    "system": "local_code_group",
+                                    "code": "bh_assessment",
+                                    "display": "Behavioral health assessments"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "BH",
+                                    "display": "Behavioral health information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "PSYTHPN",
+                                    "display": "Psychotherapy note information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+                                    "code": "R",
+                                    "display": "Restricted",
+                                    "extension": [
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-classifier",
+                                            "valueReference": {
+                                                "display": "LEAP+ Security Labeling Service"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "status": "final",
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/observation-identifier",
+                                "value": "OUDTR-56782"
+                            }
+                        ],
+                        "code": {
+                            "coding": [
+                                {
+                                    "code": "444175001",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Guided self-help cognitive behavioral therapy (regime/therapy)"
+                                }
+                            ],
+                            "text": "Mapple CBT Tool - OUD self-help thought record"
+                        },
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "effectiveDateTime": "2023-08-05T14:45:00Z",
+                        "performer": [
+                            {
+                                "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                            }
+                        ],
+                        "updated": true
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/RelatedPerson/0197837a-cbb5-70eb-814c-c16762b98760",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "RelatedPerson",
+                        "id": "0197837a-cbb5-70eb-814c-c16762b98760",
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/relatedperson-identifier",
+                                "value": "RP-56789"
+                            }
+                        ],
+                        "patient": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "relationship": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "WIFE",
+                                        "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                                        "display": "wife"
+                                    }
+                                ]
+                            },
+                            {
+                                "coding": [
+                                    {
+                                        "code": "RESPRSN",
+                                        "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+                                        "display": "responsible party"
+                                    }
+                                ]
+                            }
+                        ],
+                        "name": [
+                            {
+                                "family": "Frederickson",
+                                "given": [
+                                    "Ellie"
+                                ]
+                            }
+                        ],
+                        "meta": {
+                            "versionId": "0197837a-d079-718e-81e5-9ded2b61bf19",
+                            "lastUpdated": "2025-06-18T14:39:13.529Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": []
+                        },
+                        "updated": false
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/MedicationRequest/0197837a-cb82-7107-b650-d14ba481f0f0",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "MedicationRequest",
+                        "id": "0197837a-cb82-7107-b650-d14ba481f0f0",
+                        "meta": {
+                            "profile": [
+                                "http://shift.github.io/demo/StructureDefinition/sensitive-medication-request-profile"
+                            ],
+                            "versionId": "0197837a-cea8-70ba-8a1a-3ab52bb297a2",
+                            "lastUpdated": "2025-06-18T14:39:13.064Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": [
+                                {
+                                    "system": "local_code_group",
+                                    "code": "opioid_medication",
+                                    "display": "Opioid-related medications"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "SUD",
+                                    "display": "Substance use disorder information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "OPIOIDUD",
+                                    "display": "Opioid use disorder information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+                                    "code": "R",
+                                    "display": "Restricted",
+                                    "extension": [
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-basis",
+                                            "valueCoding": {
+                                                "code": "42CFRPart2",
+                                                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                                "display": "42 CFR Part2"
+                                            }
+                                        },
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-classifier",
+                                            "valueReference": {
+                                                "display": "LEAP+ Security Labeling Service"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/medicationrequest-identifier",
+                                "value": "RX-BUPNALTREX-45601"
+                            }
+                        ],
+                        "status": "active",
+                        "intent": "order",
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "medicationCodeableConcept": {
+                            "coding": [
+                                {
+                                    "code": "352364",
+                                    "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                                    "display": "buprenorphine / naloxone"
+                                },
+                                {
+                                    "code": "425741009",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Product containing buprenorphine and naloxone (medicinal product)"
+                                }
+                            ],
+                            "text": "Buprenorphine / Naltrexone"
+                        },
+                        "dosageInstruction": [
+                            {
+                                "text": "8mg/2mg SL daily",
+                                "timing": {
+                                    "repeat": {
+                                        "frequency": 1,
+                                        "period": 1,
+                                        "periodUnit": "d"
+                                    }
+                                },
+                                "route": {
+                                    "coding": [
+                                        {
+                                            "code": "37839007",
+                                            "system": "http://snomed.info/sct",
+                                            "display": "Sublingual route"
+                                        }
+                                    ]
+                                },
+                                "doseAndRate": [
+                                    {
+                                        "doseQuantity": {
+                                            "value": 1,
+                                            "unit": "tablet/day",
+                                            "system": "http://snomed.info/sct",
+                                            "code": "428673006"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "updated": true
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/Condition/0197837a-cb7c-76ae-b34f-a3dac44a161e",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "Condition",
+                        "id": "0197837a-cb7c-76ae-b34f-a3dac44a161e",
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "clinicalStatus": {
+                            "coding": [
+                                {
+                                    "code": "active",
+                                    "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+                                }
+                            ]
+                        },
+                        "category": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "problem-list-item",
+                                        "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+                                    }
+                                ]
+                            }
+                        ],
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/condition-identifier",
+                                "value": "BUNIONS-12347"
+                            }
+                        ],
+                        "code": {
+                            "coding": [
+                                {
+                                    "code": "M20.10",
+                                    "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                                    "display": "Hallux valgus (acquired), unspecified foot"
+                                },
+                                {
+                                    "code": "415692008",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Swelling of first metatarsophalangeal joint of hallux (disorder)"
+                                }
+                            ],
+                            "text": "Bunions, bilateral"
+                        },
+                        "meta": {
+                            "versionId": "0197837a-ce7c-763a-828a-5bccd5130959",
+                            "lastUpdated": "2025-06-18T14:39:13.020Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": []
+                        },
+                        "updated": false
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/DiagnosticReport/0197837a-cbaf-754a-91c9-827c02ec4515",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "DiagnosticReport",
+                        "id": "0197837a-cbaf-754a-91c9-827c02ec4515",
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/diagnosticreport-identifier",
+                                "value": "XRAY-23456"
+                            }
+                        ],
+                        "status": "final",
+                        "category": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "RAD",
+                                        "system": "http://terminology.hl7.org/CodeSystem/v2-0074",
+                                        "display": "Radiology"
+                                    }
+                                ]
+                            }
+                        ],
+                        "code": {
+                            "coding": [
+                                {
+                                    "code": "73620",
+                                    "system": "http://www.ama-assn.org/go/cpt",
+                                    "display": "Radiologic examination, foot; 2 views"
+                                }
+                            ],
+                            "text": "X-ray, bilateral feet, weightbearing, 2 views: dorsoplantar (DP) and axial"
+                        },
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "effectiveDateTime": "2022-11-15T10:30:00Z",
+                        "issued": "2022-11-15T14:45:00Z",
+                        "performer": [
+                            {
+                                "display": "Dr. Robert Smith, Radiologist"
+                            }
+                        ],
+                        "conclusion": "Bilateral bunions with hallux valgus deformity, moderate degenerative changes in the first metatarsophalangeal joint bilaterally, more pronounced on the right.",
+                        "meta": {
+                            "versionId": "0197837a-d04c-779a-a83a-a3779eb3745f",
+                            "lastUpdated": "2025-06-18T14:39:13.484Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": []
+                        },
+                        "updated": false
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/Condition/0197837a-cba0-7186-b667-ae7f954da96d",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "Condition",
+                        "id": "0197837a-cba0-7186-b667-ae7f954da96d",
+                        "meta": {
+                            "profile": [
+                                "http://shift.github.io/demo/StructureDefinition/sensitive-condition-profile"
+                            ],
+                            "versionId": "0197837a-cfd3-73eb-8751-ecf9b9a29774",
+                            "lastUpdated": "2025-06-18T14:39:13.363Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": [
+                                {
+                                    "system": "local_code_group",
+                                    "code": "opioid_condition",
+                                    "display": "Opioid-related conditions"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "SUD",
+                                    "display": "Substance use disorder information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "OPIOIDUD",
+                                    "display": "Opioid use disorder information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+                                    "code": "R",
+                                    "display": "Restricted",
+                                    "extension": [
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-basis",
+                                            "valueCoding": {
+                                                "code": "42CFRPart2",
+                                                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                                "display": "42 CFR Part2"
+                                            }
+                                        },
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-classifier",
+                                            "valueReference": {
+                                                "display": "LEAP+ Security Labeling Service"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "clinicalStatus": {
+                            "coding": [
+                                {
+                                    "code": "active",
+                                    "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+                                }
+                            ]
+                        },
+                        "category": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "problem-list-item",
+                                        "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+                                    }
+                                ]
+                            },
+                            {
+                                "coding": [
+                                    {
+                                        "code": "encounter-diagnosis",
+                                        "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+                                    }
+                                ]
+                            }
+                        ],
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/condition-identifier",
+                                "value": "OUD-12345"
+                            }
+                        ],
+                        "code": {
+                            "coding": [
+                                {
+                                    "code": "F11.11",
+                                    "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                                    "display": "Opioid abuse, in remission"
+                                },
+                                {
+                                    "code": "5602001",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Opioid abuse"
+                                }
+                            ],
+                            "text": "Opioid abuse, in remission"
+                        },
+                        "recordedDate": "2025-04-06",
+                        "updated": true
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/Observation/0197837a-cb73-71bb-9693-d00675ad9678",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "Observation",
+                        "id": "0197837a-cb73-71bb-9693-d00675ad9678",
+                        "status": "final",
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/observation-identifier",
+                                "value": "BP-56783"
+                            }
+                        ],
+                        "category": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "vital-signs",
+                                        "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                                        "display": "Vital Signs"
+                                    }
+                                ]
+                            }
+                        ],
+                        "code": {
+                            "coding": [
+                                {
+                                    "code": "75367002",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Blood pressure (observable entity)"
+                                },
+                                {
+                                    "code": "85354-9",
+                                    "system": "http://loinc.org",
+                                    "display": "Blood pressure panel with all children optional"
+                                }
+                            ],
+                            "text": "Mapple Vitals - Blood pressure"
+                        },
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "effectiveDateTime": "2023-08-15T09:30:00Z",
+                        "performer": [
+                            {
+                                "reference": "CareTeam/0197837a-cb8d-749b-9438-3b4a9af95b1e"
+                            }
+                        ],
+                        "component": [
+                            {
+                                "code": {
+                                    "coding": [
+                                        {
+                                            "code": "8480-6",
+                                            "system": "http://loinc.org",
+                                            "display": "Systolic blood pressure"
+                                        }
+                                    ]
+                                },
+                                "valueQuantity": {
+                                    "value": 132,
+                                    "unit": "mm[Hg]",
+                                    "system": "http://unitsofmeasure.org",
+                                    "code": "mm[Hg]"
+                                }
+                            },
+                            {
+                                "code": {
+                                    "coding": [
+                                        {
+                                            "code": "8462-4",
+                                            "system": "http://loinc.org",
+                                            "display": "Diastolic blood pressure"
+                                        }
+                                    ]
+                                },
+                                "valueQuantity": {
+                                    "value": 86,
+                                    "unit": "mm[Hg]",
+                                    "system": "http://unitsofmeasure.org",
+                                    "code": "mm[Hg]"
+                                }
+                            }
+                        ],
+                        "meta": {
+                            "versionId": "0197837a-ce33-778d-af8c-63e78301a01b",
+                            "lastUpdated": "2025-06-18T14:39:12.947Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": []
+                        },
+                        "updated": false
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/Observation/0197837a-cba8-77bd-a259-89806d1c4ba5",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "Observation",
+                        "id": "0197837a-cba8-77bd-a259-89806d1c4ba5",
+                        "meta": {
+                            "profile": [
+                                "http://shift.github.io/demo/StructureDefinition/sensitive-observation-profile"
+                            ],
+                            "versionId": "0197837a-d025-7793-a6d6-30bfb532a642",
+                            "lastUpdated": "2025-06-18T14:39:13.445Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": [
+                                {
+                                    "system": "local_code_group",
+                                    "code": "bh_assessment",
+                                    "display": "Behavioral health assessments"
+                                },
+                                {
+                                    "system": "local_code_group",
+                                    "code": "depression_assessment",
+                                    "display": "Depression screening instruments"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "BH",
+                                    "display": "Behavioral health information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+                                    "code": "R",
+                                    "display": "Restricted",
+                                    "extension": [
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-classifier",
+                                            "valueReference": {
+                                                "display": "LEAP+ Security Labeling Service"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "status": "final",
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/observation-identifier",
+                                "value": "PHQ9-56781"
+                            }
+                        ],
+                        "code": {
+                            "coding": [
+                                {
+                                    "code": "720433000",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Patient Health Questionnaire Nine Item score (observable entity)"
+                                }
+                            ],
+                            "text": "Mapple Screening - PHQ-9 depression assessment"
+                        },
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "performer": [
+                            {
+                                "display": "Lucy van Pelt"
+                            }
+                        ],
+                        "effectiveDateTime": "2023-08-12T14:30:00Z",
+                        "extension": [
+                            {
+                                "url": "http://shift.github.io/demo/StructureDefinition/observation-supportingInfo",
+                                "valueCodeableConcept": {
+                                    "coding": [
+                                        {
+                                            "code": "96127",
+                                            "system": "http://www.ama-assn.org/go/cpt",
+                                            "display": "Brief emotional/behavioral assessment (eg, depression inventory, attention-deficit/hyperactivity disorder [ADHD] scale), with scoring and documentation, per standardized instrument"
+                                        }
+                                    ],
+                                    "text": "Brief emotional/behavioral assessment - CPT 96127 (not billed)"
+                                }
+                            }
+                        ],
+                        "valueInteger": 15,
+                        "updated": true
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/MedicationRequest/0197837a-cb91-70bc-8ec2-f96e85d70951",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "MedicationRequest",
+                        "id": "0197837a-cb91-70bc-8ec2-f96e85d70951",
+                        "meta": {
+                            "profile": [
+                                "http://shift.github.io/demo/StructureDefinition/sensitive-medication-request-profile"
+                            ],
+                            "versionId": "0197837a-cf3b-758b-ad33-bd27dd9dbce7",
+                            "lastUpdated": "2025-06-18T14:39:13.211Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": [
+                                {
+                                    "system": "local_code_group",
+                                    "code": "bh_medication",
+                                    "display": "Behavioral health medications"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "BH",
+                                    "display": "Behavioral health information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+                                    "code": "R",
+                                    "display": "Restricted",
+                                    "extension": [
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-classifier",
+                                            "valueReference": {
+                                                "display": "LEAP+ Security Labeling Service"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/medicationrequest-identifier",
+                                "value": "RX-FLUOXETINE-45602"
+                            }
+                        ],
+                        "status": "active",
+                        "intent": "order",
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "medicationCodeableConcept": {
+                            "coding": [
+                                {
+                                    "code": "315952",
+                                    "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                                    "display": "fluoxetine 20 MG"
+                                }
+                            ],
+                            "text": "Fluoxetine 20 MG Oral Capsule"
+                        },
+                        "dosageInstruction": [
+                            {
+                                "text": "20mg PO daily",
+                                "timing": {
+                                    "repeat": {
+                                        "frequency": 1,
+                                        "period": 1,
+                                        "periodUnit": "d"
+                                    }
+                                },
+                                "route": {
+                                    "coding": [
+                                        {
+                                            "code": "26643006",
+                                            "system": "http://snomed.info/sct",
+                                            "display": "Oral route"
+                                        }
+                                    ]
+                                },
+                                "doseAndRate": [
+                                    {
+                                        "doseQuantity": {
+                                            "value": 20,
+                                            "unit": "mg",
+                                            "system": "http://unitsofmeasure.org",
+                                            "code": "mg"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "updated": true
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "Patient",
+                        "id": "0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7",
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/identifier/mrn",
+                                "value": "12345"
+                            }
+                        ],
+                        "name": [
+                            {
+                                "family": "Frederickson",
+                                "given": [
+                                    "Carl"
+                                ]
+                            }
+                        ],
+                        "birthDate": "1949-09-12",
+                        "gender": "male",
+                        "maritalStatus": {
+                            "coding": [
+                                {
+                                    "code": "M",
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus",
+                                    "display": "Married"
+                                }
+                            ]
+                        },
+                        "contact": [
+                            {
+                                "relationship": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "code": "C",
+                                                "system": "http://terminology.hl7.org/CodeSystem/v2-0131",
+                                                "display": "Emergency Contact"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "name": {
+                                    "given": [
+                                        "Ellie"
+                                    ],
+                                    "family": "Frederickson"
+                                }
+                            }
+                        ],
+                        "meta": {
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "versionId": "01978a2f-a548-7478-809b-d926d95ad001",
+                            "lastUpdated": "2025-06-19T21:54:27.784Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "security": []
+                        },
+                        "generalPractitioner": [
+                            {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            }
+                        ],
+                        "updated": false
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/MedicationRequest/0197837a-cb86-7527-889b-9328f42d6d3c",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "MedicationRequest",
+                        "id": "0197837a-cb86-7527-889b-9328f42d6d3c",
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/medicationrequest-identifier",
+                                "value": "RX-CAPTOPRIL-45603"
+                            }
+                        ],
+                        "status": "active",
+                        "intent": "order",
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "medicationCodeableConcept": {
+                            "coding": [
+                                {
+                                    "code": "315560",
+                                    "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                                    "display": "captopril 12.5 MG"
+                                }
+                            ],
+                            "text": "Captopril 12.5 MG Oral Tablet"
+                        },
+                        "dosageInstruction": [
+                            {
+                                "text": "12.5mg PO BID",
+                                "timing": {
+                                    "repeat": {
+                                        "frequency": 2,
+                                        "period": 1,
+                                        "periodUnit": "d"
+                                    }
+                                },
+                                "route": {
+                                    "coding": [
+                                        {
+                                            "code": "26643006",
+                                            "system": "http://snomed.info/sct",
+                                            "display": "Oral route"
+                                        }
+                                    ]
+                                },
+                                "doseAndRate": [
+                                    {
+                                        "doseQuantity": {
+                                            "value": 12.5,
+                                            "unit": "mg",
+                                            "system": "http://unitsofmeasure.org",
+                                            "code": "mg"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "meta": {
+                            "versionId": "0197837a-cee3-77fd-9cfa-12e6cbc995e9",
+                            "lastUpdated": "2025-06-18T14:39:13.123Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": []
+                        },
+                        "updated": false
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/Condition/0197837a-cb99-7471-bed2-5db29568f7d9",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "Condition",
+                        "id": "0197837a-cb99-7471-bed2-5db29568f7d9",
+                        "meta": {
+                            "profile": [
+                                "http://shift.github.io/demo/StructureDefinition/sensitive-condition-profile"
+                            ],
+                            "versionId": "0197837a-cf88-735b-a6ca-c6d8540d71c5",
+                            "lastUpdated": "2025-06-18T14:39:13.288Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": [
+                                {
+                                    "system": "local_code_group",
+                                    "code": "depressive_condition",
+                                    "display": "Depressive disorders"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "BH",
+                                    "display": "Behavioral health information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "PSY",
+                                    "display": "Psychiatry information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+                                    "code": "R",
+                                    "display": "Restricted",
+                                    "extension": [
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-classifier",
+                                            "valueReference": {
+                                                "display": "LEAP+ Security Labeling Service"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "clinicalStatus": {
+                            "coding": [
+                                {
+                                    "code": "active",
+                                    "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+                                }
+                            ]
+                        },
+                        "category": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "problem-list-item",
+                                        "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+                                    }
+                                ]
+                            },
+                            {
+                                "coding": [
+                                    {
+                                        "code": "encounter-diagnosis",
+                                        "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+                                    }
+                                ]
+                            }
+                        ],
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/condition-identifier",
+                                "value": "MDD-12349"
+                            }
+                        ],
+                        "code": {
+                            "coding": [
+                                {
+                                    "code": "F33.1",
+                                    "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                                    "display": "Major depressive disorder, recurrent, moderate"
+                                },
+                                {
+                                    "code": "310496002",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Moderate depression"
+                                }
+                            ],
+                            "text": "Major depressive disorder, recurrent, moderate"
+                        },
+                        "updated": true
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/CareTeam/0197837a-cb8d-749b-9438-3b4a9af95b1e",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "CareTeam",
+                        "id": "0197837a-cb8d-749b-9438-3b4a9af95b1e",
+                        "meta": {
+                            "profile": [
+                                "http://shift.github.io/demo/StructureDefinition/sensitive-care-team-profile"
+                            ],
+                            "versionId": "0197837a-cf01-7128-abdd-85833f935125",
+                            "lastUpdated": "2025-06-18T14:39:13.153Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": [
+                                {
+                                    "system": "local_code_group",
+                                    "code": "psych_provider",
+                                    "display": "Psychiatric providers"
+                                },
+                                {
+                                    "system": "local_code_group",
+                                    "code": "bh_provider",
+                                    "display": "Behavioral health providers"
+                                },
+                                {
+                                    "system": "local_code_group",
+                                    "code": "team_provider",
+                                    "display": "Team-based providers"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "BH",
+                                    "display": "Behavioral health information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "PSY",
+                                    "display": "Psychiatry information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+                                    "code": "R",
+                                    "display": "Restricted",
+                                    "extension": [
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-classifier",
+                                            "valueReference": {
+                                                "display": "LEAP+ Security Labeling Service"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/careteam-identifier",
+                                "value": "CT-34567"
+                            }
+                        ],
+                        "status": "active",
+                        "name": "Carl Frederickson's Care Team",
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "period": {
+                            "start": "2023-01-15"
+                        },
+                        "category": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "LA27976-2",
+                                        "system": "http://loinc.org",
+                                        "display": "Encounter-focused care team"
+                                    }
+                                ]
+                            }
+                        ],
+                        "note": [
+                            {
+                                "text": "Monthly care coordination meetings scheduled to coordinate care across behavioral health, primary care, and specialty services. Substance use treatment protected under 42 CFR Part 2.",
+                                "time": "2023-05-10T14:00:00Z",
+                                "authorString": "Dr. Hibbert"
+                            }
+                        ],
+                        "participant": [
+                            {
+                                "role": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "code": "446050000",
+                                                "system": "http://snomed.info/sct",
+                                                "display": "Primary care physician"
+                                            }
+                                        ],
+                                        "text": "Primary care provider"
+                                    }
+                                ],
+                                "member": {
+                                    "display": "Dr. Hibbert"
+                                },
+                                "onBehalfOf": {
+                                    "display": "Springfield Medical Center"
+                                },
+                                "period": {
+                                    "start": "2020-03-15"
+                                }
+                            },
+                            {
+                                "role": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "code": "309343006",
+                                                "system": "http://snomed.info/sct",
+                                                "display": "Physician"
+                                            }
+                                        ],
+                                        "text": "Psychiatrist"
+                                    }
+                                ],
+                                "member": {
+                                    "display": "Dr. Funke"
+                                },
+                                "onBehalfOf": {
+                                    "display": "Springfield Medical Center"
+                                },
+                                "period": {
+                                    "start": "2022-09-08"
+                                }
+                            },
+                            {
+                                "role": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "code": "66288003",
+                                                "system": "http://snomed.info/sct",
+                                                "display": "Skin of infraclavicular region"
+                                            }
+                                        ],
+                                        "text": "Psychotherapist"
+                                    }
+                                ],
+                                "member": {
+                                    "display": "Lucy van Pelt"
+                                },
+                                "onBehalfOf": {
+                                    "display": "Springfield Medical Center"
+                                },
+                                "period": {
+                                    "start": "2022-10-12"
+                                }
+                            },
+                            {
+                                "role": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "code": "309343006",
+                                                "system": "http://snomed.info/sct",
+                                                "display": "Physician"
+                                            }
+                                        ],
+                                        "text": "Psychiatrist"
+                                    }
+                                ],
+                                "member": {
+                                    "display": "Dr. White"
+                                },
+                                "onBehalfOf": {
+                                    "display": "Springfield Medical Center Addiction Treatment Program"
+                                },
+                                "period": {
+                                    "start": "2022-06-30"
+                                },
+                                "extension": [
+                                    {
+                                        "url": "http://shift.github.io/demo/StructureDefinition/42CFRPart2",
+                                        "valueBoolean": true
+                                    }
+                                ]
+                            },
+                            {
+                                "role": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "code": "159034004",
+                                                "system": "http://snomed.info/sct",
+                                                "display": "Podiatrist"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "member": {
+                                    "display": "Dr. Sasquatch"
+                                },
+                                "onBehalfOf": {
+                                    "display": "Orthopedic Health Services"
+                                },
+                                "period": {
+                                    "start": "2023-02-25"
+                                }
+                            },
+                            {
+                                "role": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "code": "158970007",
+                                                "system": "http://snomed.info/sct",
+                                                "display": "Anaesthetist"
+                                            }
+                                        ],
+                                        "text": "Anesthesiologist"
+                                    }
+                                ],
+                                "member": {
+                                    "display": "Dr. Aurora"
+                                },
+                                "onBehalfOf": {
+                                    "display": "Orthopedic Health Services"
+                                },
+                                "period": {
+                                    "start": "2023-05-15"
+                                }
+                            },
+                            {
+                                "role": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "code": "66862007",
+                                                "system": "http://snomed.info/sct",
+                                                "display": "Radiologist"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "member": {
+                                    "display": "Dr. Banner"
+                                },
+                                "onBehalfOf": {
+                                    "display": "Regional Advanced Diagnostic Services"
+                                },
+                                "period": {
+                                    "start": "2023-03-10"
+                                }
+                            },
+                            {
+                                "role": [
+                                    {
+                                        "coding": [
+                                            {
+                                                "code": "224546007",
+                                                "system": "http://snomed.info/sct",
+                                                "display": "ICN - Infection control nurse"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "member": {
+                                    "display": "ACO Care Manager"
+                                },
+                                "onBehalfOf": {
+                                    "display": "Springfield ACO"
+                                },
+                                "period": {
+                                    "start": "2022-01-01"
+                                }
+                            }
+                        ],
+                        "managingOrganization": [
+                            {
+                                "display": "Springfield Medical Center"
+                            }
+                        ],
+                        "reasonCode": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "386661006",
+                                        "system": "http://snomed.info/sct",
+                                        "display": "Fever (finding)"
+                                    }
+                                ],
+                                "text": "Multidisciplinary care"
+                            }
+                        ],
+                        "updated": true
+                    }
+                },
+                {
+                    "fullUrl": "https://medplum-backend.fly.dev/fhir/R4/Condition/0197837a-cb9d-7398-84b5-9486d8701fa5",
+                    "search": {
+                        "mode": "match"
+                    },
+                    "resource": {
+                        "resourceType": "Condition",
+                        "id": "0197837a-cb9d-7398-84b5-9486d8701fa5",
+                        "meta": {
+                            "profile": [
+                                "http://shift.github.io/demo/StructureDefinition/sensitive-condition-profile"
+                            ],
+                            "versionId": "0197837a-cfb0-7045-b973-ef61bb11f073",
+                            "lastUpdated": "2025-06-18T14:39:13.328Z",
+                            "author": {
+                                "reference": "Practitioner/01978246-9adb-759c-90ed-3c6e9b0c7e4c",
+                                "display": "EHR1 SHIFT"
+                            },
+                            "project": "01978246-9a88-72d3-99b9-04a3ce989088",
+                            "compartment": [
+                                {
+                                    "reference": "Project/01978246-9a88-72d3-99b9-04a3ce989088"
+                                },
+                                {
+                                    "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                                }
+                            ],
+                            "security": [
+                                {
+                                    "system": "local_code_group",
+                                    "code": "anxiety_condition",
+                                    "display": "Anxiety and obsessive disorders"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "BH",
+                                    "display": "Behavioral health information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                                    "code": "PSY",
+                                    "display": "Psychiatry information sensitivity"
+                                },
+                                {
+                                    "system": "http://terminology.hl7.org/CodeSystem/v3-Confidentiality",
+                                    "code": "R",
+                                    "display": "Restricted",
+                                    "extension": [
+                                        {
+                                            "url": "http://hl7.org/fhir/uv/security-label-ds4p/StructureDefinition/extension-sec-label-classifier",
+                                            "valueReference": {
+                                                "display": "LEAP+ Security Labeling Service"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        "subject": {
+                            "reference": "Patient/0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7"
+                        },
+                        "clinicalStatus": {
+                            "coding": [
+                                {
+                                    "code": "active",
+                                    "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+                                }
+                            ]
+                        },
+                        "category": [
+                            {
+                                "coding": [
+                                    {
+                                        "code": "problem-list-item",
+                                        "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+                                    }
+                                ]
+                            },
+                            {
+                                "coding": [
+                                    {
+                                        "code": "encounter-diagnosis",
+                                        "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+                                    }
+                                ]
+                            }
+                        ],
+                        "identifier": [
+                            {
+                                "system": "http://shift.github.io/demo/condition-identifier",
+                                "value": "OCPD-12348"
+                            }
+                        ],
+                        "code": {
+                            "coding": [
+                                {
+                                    "code": "F60.5",
+                                    "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                                    "display": "Obsessive-compulsive personality disorder"
+                                },
+                                {
+                                    "code": "1376001",
+                                    "system": "http://snomed.info/sct",
+                                    "display": "Obsessive compulsive personality disorder"
+                                }
+                            ],
+                            "text": "Obsessive-compulsive personality disorder"
+                        },
+                        "updated": true
+                    }
+                }
+            ],
+            "link": [
+                {
+                    "relation": "self",
+                    "url": "https://medplum-backend.fly.dev/fhir/R4/Patient?_compartment=Patient%2F0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7&_count=1000&_type=Account,ActivityDefinition,AdverseEvent,AllergyIntolerance,Appointment,AppointmentResponse,AuditEvent,Basic,BiologicallyDerivedProduct,BodyStructure,Bundle,CapabilityStatement,CarePlan,CareTeam,CatalogEntry,ChargeItem,ChargeItemDefinition,Claim,ClaimResponse,ClinicalImpression,CodeSystem,Communication,CommunicationRequest,CompartmentDefinition,Composition,ConceptMap,Condition,Consent,Contract,Coverage,CoverageEligibilityRequest,CoverageEligibilityResponse,DetectedIssue,Device,DeviceDefinition,DeviceMetric,DeviceRequest,DeviceUseStatement,DiagnosticReport,DocumentManifest,DocumentReference,EffectEvidenceSynthesis,Encounter,Endpoint,EnrollmentRequest,EnrollmentResponse,EpisodeOfCare,EventDefinition,Evidence,EvidenceVariable,ExampleScenario,ExplanationOfBenefit,FamilyMemberHistory,Flag,Goal,GraphDefinition,Group,GuidanceResponse,HealthcareService,ImagingStudy,Immunization,ImmunizationEvaluation,ImmunizationRecommendation,ImplementationGuide,InsurancePlan,Invoice,Library,Linkage,List,Location,Measure,MeasureReport,Media,Medication,MedicationAdministration,MedicationDispense,MedicationKnowledge,MedicationRequest,MedicationStatement,MedicinalProduct,MedicinalProductAuthorization,MedicinalProductContraindication,MedicinalProductIndication,MedicinalProductIngredient,MedicinalProductInteraction,MedicinalProductManufactured,MedicinalProductPackaged,MedicinalProductPharmaceutical,MedicinalProductUndesirableEffect,MessageDefinition,MessageHeader,MolecularSequence,NamingSystem,NutritionOrder,Observation,ObservationDefinition,OperationDefinition,OperationOutcome,Organization,OrganizationAffiliation,Patient,Patient,PaymentNotice,PaymentReconciliation,Person,PlanDefinition,Practitioner,PractitionerRole,Procedure,Provenance,Questionnaire,QuestionnaireResponse,RelatedPerson,RequestGroup,ResearchDefinition,ResearchElementDefinition,ResearchStudy,ResearchSubject,RiskAssessment,RiskEvidenceSynthesis,Schedule,SearchParameter,ServiceRequest,Slot,Specimen,SpecimenDefinition,StructureDefinition,StructureMap,Subscription,Substance,SubstanceNucleicAcid,SubstancePolymer,SubstanceProtein,SubstanceReferenceInformation,SubstanceSourceMaterial,SubstanceSpecification,SupplyDelivery,SupplyRequest,Task,TerminologyCapabilities,TestReport,TestScript,ValueSet,VerificationResult,VisionPrescription"
+                },
+                {
+                    "relation": "first",
+                    "url": "https://medplum-backend.fly.dev/fhir/R4/Patient?_compartment=Patient%2F0197837a-cb6c-72e2-9f3f-b9dec6c0f4d7&_count=1000&_type=Account,ActivityDefinition,AdverseEvent,AllergyIntolerance,Appointment,AppointmentResponse,AuditEvent,Basic,BiologicallyDerivedProduct,BodyStructure,Bundle,CapabilityStatement,CarePlan,CareTeam,CatalogEntry,ChargeItem,ChargeItemDefinition,Claim,ClaimResponse,ClinicalImpression,CodeSystem,Communication,CommunicationRequest,CompartmentDefinition,Composition,ConceptMap,Condition,Consent,Contract,Coverage,CoverageEligibilityRequest,CoverageEligibilityResponse,DetectedIssue,Device,DeviceDefinition,DeviceMetric,DeviceRequest,DeviceUseStatement,DiagnosticReport,DocumentManifest,DocumentReference,EffectEvidenceSynthesis,Encounter,Endpoint,EnrollmentRequest,EnrollmentResponse,EpisodeOfCare,EventDefinition,Evidence,EvidenceVariable,ExampleScenario,ExplanationOfBenefit,FamilyMemberHistory,Flag,Goal,GraphDefinition,Group,GuidanceResponse,HealthcareService,ImagingStudy,Immunization,ImmunizationEvaluation,ImmunizationRecommendation,ImplementationGuide,InsurancePlan,Invoice,Library,Linkage,List,Location,Measure,MeasureReport,Media,Medication,MedicationAdministration,MedicationDispense,MedicationKnowledge,MedicationRequest,MedicationStatement,MedicinalProduct,MedicinalProductAuthorization,MedicinalProductContraindication,MedicinalProductIndication,MedicinalProductIngredient,MedicinalProductInteraction,MedicinalProductManufactured,MedicinalProductPackaged,MedicinalProductPharmaceutical,MedicinalProductUndesirableEffect,MessageDefinition,MessageHeader,MolecularSequence,NamingSystem,NutritionOrder,Observation,ObservationDefinition,OperationDefinition,OperationOutcome,Organization,OrganizationAffiliation,Patient,Patient,PaymentNotice,PaymentReconciliation,Person,PlanDefinition,Practitioner,PractitionerRole,Procedure,Provenance,Questionnaire,QuestionnaireResponse,RelatedPerson,RequestGroup,ResearchDefinition,ResearchElementDefinition,ResearchStudy,ResearchSubject,RiskAssessment,RiskEvidenceSynthesis,Schedule,SearchParameter,ServiceRequest,Slot,Specimen,SpecimenDefinition,StructureDefinition,StructureMap,Subscription,Substance,SubstanceNucleicAcid,SubstancePolymer,SubstanceProtein,SubstanceReferenceInformation,SubstanceSourceMaterial,SubstanceSpecification,SupplyDelivery,SupplyRequest,Task,TerminologyCapabilities,TestReport,TestScript,ValueSet,VerificationResult,VisionPrescription"
+                }
+            ]
+        }
+    }
+}
