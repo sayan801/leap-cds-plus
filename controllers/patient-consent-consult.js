@@ -7,6 +7,11 @@ const logger = require("../lib/logger");
 
 async function post(req, res, next) {
   try {
+    console.log('=== Environment Variables Debug ===');
+    console.log('NODE_ENV:', process.env.NODE_ENV);
+    console.log('CONSENT_FHIR_SERVERS:', process.env.CONSENT_FHIR_SERVERS);
+    console.log('CONSENT_FHIR_SERVERS_AUTH:', process.env.CONSENT_FHIR_SERVERS_AUTH);
+    console.log('===================================');
     validateConsentDecisionHookRequest(req);
 
     const patientIds = req.body.context.patientId;

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/sdhealthconnect/leap-cds/schemas/patient-consent-consult-hook-request.schema.json",
+  "$id": "file:///home/technicise61/code/leap-cds-plus/schemas/patient-consent-consult-hook-request.schema.json",
   "title": "Patient Consent Consult Hook Request",
   "description": "Patient Consent Consult Hook Request",
   "definitions": {

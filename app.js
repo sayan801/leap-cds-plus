@@ -1,6 +1,16 @@
+// Load environment variables first
+require('dotenv').config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+
+// Add debug logs at the very top
+console.log('=== DEBUG: Environment Variables ===');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('CONSENT_FHIR_SERVERS:', process.env.CONSENT_FHIR_SERVERS);
+console.log('CONSENT_FHIR_SERVERS_AUTH:', process.env.CONSENT_FHIR_SERVERS_AUTH);
+console.log('====================================');
 
 const { ping } = require("./controllers/ping");
 const { error } = require("./controllers/error");
