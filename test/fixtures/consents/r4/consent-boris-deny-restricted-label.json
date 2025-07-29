@@ -1,6 +1,6 @@
 {
   "resourceType": "Consent",
-  "id": "6",
+  "id": "C-6",
   "status": "active",
   "category": [
     {
@@ -21,13 +21,13 @@
     }
   ],
   "patient": {
-    "reference": "Patient/52",
+    "reference": "Patient/P-52",
     "display": "Betterhalf, Boris"
   },
   "dateTime": "2019-11-01",
   "organization": [
     {
-      "reference": "Organization/53"
+      "reference": "Organization/O-53"
     }
   ],
   "policyRule": {
@@ -64,7 +64,7 @@
               ]
             },
             "reference": {
-              "reference": "Organization/54"
+              "reference": "Organization/O-54"
             }
           }
         ],
